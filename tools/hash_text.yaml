@@ -1,0 +1,22 @@
+name: hash_text
+version: "1.0"
+description: >
+  Computes a cryptographic hash of the input text using the specified
+  algorithm. Use for checksums, file integrity verification, and
+  content deduplication. NOT for password storage.
+executor_type: text_transform
+enabled: true
+tags: [security, text, offline]
+config:
+  operation: hash
+args:
+  - name: text
+    type: string
+    required: true
+    description: "The text to hash"
+  - name: algorithm
+    type: string
+    required: false
+    default: "sha256"
+    enum: [sha256, sha512, md5, blake2b, sha1]
+    description: "Hash algorithm. sha256 is the default and recommended for general use."

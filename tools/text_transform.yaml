@@ -1,0 +1,19 @@
+name: text_transform
+version: "1.0"
+description: >
+  Transforms text: case conversion (upper/lower/title), whitespace
+  stripping, reversal, URL slug generation, and word/character/line
+  counting. Use for any text manipulation request.
+executor_type: text_transform
+enabled: true
+tags: [text, offline]
+args:
+  - name: text
+    type: string
+    required: true
+    description: "The input text to transform"
+  - name: operation
+    type: string
+    required: true
+    enum: [upper, lower, title, strip, reverse, slugify, word_count]
+    description: "Operation: upper/lower/title (case), strip (trim whitespace), reverse, slugify (URL slug), word_count (stats)"

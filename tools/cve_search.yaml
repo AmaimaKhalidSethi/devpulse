@@ -1,0 +1,31 @@
+name: cve_search
+version: "1.0"
+description: >
+  Searches the NIST National Vulnerability Database (NVD) for CVEs matching
+  a keyword. Returns CVE IDs, CVSS scores, severity, and descriptions.
+  Use when a user asks about vulnerabilities in a specific package, library,
+  or technology. Free, no API key required. Rate limited to 5 requests per
+  30 seconds by NVD - the tool respects this automatically.
+executor_type: http_get
+enabled: true
+tags: [security, cve, real-time, http]
+config:
+  url: "https://services.nvd.nist.gov/rest/json/cves/2.0"
+  timeout_seconds: 15
+  response_path: "vulnerabilities"
+  params_from_args: [keywordSearch, resultsPerPage, cvssV3Severity]
+args:
+  - name: keywordSearch
+    type: string
+    required: true
+    description: "Package or technology to search CVEs for, e.g. 'Flask 3.0', 'OpenSSL', 'log4j'"
+  - name: resultsPerPage
+    type: integer
+    required: false
+    default: 5
+    description: "Number of CVE results to return (max 20, NVD default 2000 - keep small)"
+  - name: cvssV3Severity
+    type: string
+    required: false
+    description: "Filter by severity: LOW, MEDIUM, HIGH, CRITICAL"
+    enum: [LOW, MEDIUM, HIGH, CRITICAL]

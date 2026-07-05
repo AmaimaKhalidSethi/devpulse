@@ -1,0 +1,29 @@
+name: convert_currency
+version: "1.0"
+description: >
+  Converts an amount between currencies using live exchange rates from
+  the Frankfurter API (ECB-sourced, updated daily, no API key needed).
+  Returns the converted amount and the current exchange rate.
+  Use for any currency conversion question.
+executor_type: http_get
+enabled: true
+tags: [finance, real-time, http]
+config:
+  url: "https://api.frankfurter.dev/v2/rate/{from_currency}/{to_currency}"
+  timeout_seconds: 6
+  response_path: "rate"
+  params_from_args: []
+args:
+  - name: from_currency
+    type: string
+    required: true
+    description: "Source currency ISO 4217 code, e.g. 'USD', 'EUR', 'GBP'"
+  - name: to_currency
+    type: string
+    required: true
+    description: "Target currency ISO 4217 code, e.g. 'PKR', 'JPY', 'AED'"
+  - name: amount
+    type: float
+    required: false
+    default: 1.0
+    description: "Amount to convert (default 1.0 - returns the rate itself)"

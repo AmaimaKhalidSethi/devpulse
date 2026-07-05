@@ -1,0 +1,17 @@
+name: datetime_now
+version: "1.0"
+description: >
+  Returns the current date and time in any IANA timezone.
+  Use whenever the user asks what time or date it is, or needs
+  the current time in a specific city or region.
+executor_type: datetime_tool
+enabled: true
+tags: [datetime, offline]
+config:
+  operation: now
+args:
+  - name: timezone
+    type: string
+    required: false
+    default: "UTC"
+    description: "IANA timezone name, e.g. 'Asia/Karachi', 'America/New_York', 'Europe/London', 'UTC'"
