@@ -1,0 +1,20 @@
+name: mock_echo
+version: "1.0"
+description: >
+  Returns its input arguments back to the caller unchanged.
+  Use for testing that the tool registry, API routing, and agent
+  tool-calling are all working end to end without real API calls.
+executor_type: mock_static
+enabled: true
+tags: [testing, offline]
+config:
+  response:
+    status: "ok"
+    tool: "mock_echo"
+  echo_args: true
+args:
+  - name: message
+    type: string
+    required: false
+    default: "hello"
+    description: "Any test message - will be echoed back in the response"

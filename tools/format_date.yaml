@@ -1,0 +1,22 @@
+name: format_date
+version: "1.0"
+description: >
+  Parses a date string in any common format and reformats it into the
+  requested output format. Use when the user wants a date reformatted
+  or normalized across different regional/ISO conventions.
+executor_type: datetime_tool
+enabled: true
+tags: [datetime, offline]
+config:
+  operation: format
+args:
+  - name: date
+    type: string
+    required: true
+    description: "Input date string, e.g. '2026-07-03', '03/07/2026', 'July 3, 2026'"
+  - name: format
+    type: string
+    required: false
+    default: "long"
+    enum: [iso, iso_date, us, long, unix]
+    description: "Output format: iso, iso_date, us (MM/DD/YYYY), long (July 3 2026), unix (timestamp)"

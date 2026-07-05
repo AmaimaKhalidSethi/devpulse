@@ -1,0 +1,29 @@
+name: get_weather
+version: "1.0"
+description: >
+  Fetches current weather conditions for any city using the Open-Meteo API
+  (free, no API key required). Returns temperature, wind speed, and a
+  human-readable condition description. Use for any weather-related question.
+executor_type: http_get
+enabled: true
+tags: [weather, real-time, http]
+config:
+  url: "https://geocoding-api.open-meteo.com/v1/search"
+  timeout_seconds: 8
+  response_path: "results[0]"
+  params_from_args: [name, count, language]
+args:
+  - name: name
+    type: string
+    required: true
+    description: "City name to look up weather for, e.g. 'Lahore', 'London', 'New York'"
+  - name: count
+    type: integer
+    required: false
+    default: 1
+    description: "Number of results to return (default 1)"
+  - name: language
+    type: string
+    required: false
+    default: "en"
+    description: "Response language code"
